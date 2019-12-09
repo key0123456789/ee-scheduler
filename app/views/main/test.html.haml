@@ -1,0 +1,6 @@
+= month_calendar events: @wishes do |date, wishes|
+  = date
+
+  - wishes.each do |wish|
+    %div
+      - wish.name

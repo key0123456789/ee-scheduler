@@ -1,0 +1,29 @@
+%h1 スケジュール
+%br
+
+%h2 スケジュール一覧
+%table
+  %thead
+    %tr
+      %th 日程
+      %th 名前
+      %th
+      %th
+      %th
+  %tbody
+    - @wishes.each do |wish|
+      %tr
+        %td= wish.start_time.strftime("%m/%d")
+        %td= link_to "#{wish.name}", wish
+        %td= link_to '編集', edit_wish_path(wish)
+        %td= link_to '削除', wish, method: :delete, data: { confirm: "#{wish.name}を削除しますか？" }
+%br
+  = link_to '登録', new_wish_path
+%br
+%h2 カレンダー
+= month_calendar events: @wishes do |date, wishes|
+  = date
+
+  - wishes.each do |wish|
+    %li
+      = link_to "#{wish.name}", wish

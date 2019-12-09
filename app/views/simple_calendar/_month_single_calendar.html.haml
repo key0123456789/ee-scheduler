@@ -1,0 +1,8 @@
+.single_calendar
+  = link_to '登録', new_wish_path
+  .single_calendar-title
+    = link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view
+    = start_date.year
+    = t('date.month_names')[start_date.month]
+    = link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view
+  
