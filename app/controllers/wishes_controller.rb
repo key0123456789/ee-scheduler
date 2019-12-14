@@ -4,7 +4,7 @@ class WishesController < ApplicationController
   # GET /wishes
   # GET /wishes.json
   def index
-    @wishes = Wish.order(start_time: :ASC)
+    @choises = Choise.all
   end
 
   # GET /wishes/1
@@ -14,7 +14,9 @@ class WishesController < ApplicationController
 
   # GET /wishes/new
   def new
-    @wish = Wish.new
+    @choise = Choise.new
+    # @choise.test_methods.build
+    # @wish = Wish.new
   end
 
   # GET /wishes/1/edit
@@ -24,17 +26,18 @@ class WishesController < ApplicationController
   # POST /wishes
   # POST /wishes.json
   def create
-    @wish = Wish.new(wish_params)
+    @choise = Choise.new(choise_params)
+    # @wish = Wish.new(wish_params)
 
-    respond_to do |format|
-      if @wish.save
-        format.html { redirect_to @wish, notice: 'Wish was successfully created.' }
-        format.json { render :show, status: :created, location: @wish }
-      else
-        format.html { render :new }
-        format.json { render json: @wish.errors, status: :unprocessable_entity }
-      end
-    end
+    # respond_to do |format|
+    #   if @wish.save
+    #     format.html { redirect_to @wish, notice: 'Wish was successfully created.' }
+    #     format.json { render :show, status: :created, location: @wish }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @wish.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /wishes/1
@@ -70,5 +73,10 @@ class WishesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def wish_params
       params.require(:wish).permit(:name, :start_time)
+      # params.require(:wish).permit(:name, :start_time, tests_attributes: [:id, :test_name, :test_day])
+    end
+
+    def choise_params
+      params.require(:choise).permit(:college, :fuculty, :department, :condition, method_attributes[:id, :test_name, wish_attributes[:id, :name, :start_time]])
     end
 end
